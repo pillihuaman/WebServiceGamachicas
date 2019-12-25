@@ -64,8 +64,8 @@ public class WelcomeController {
 		}
         return new ModelAndView("home", "command", new ViewStockBE());
 	}
-	  
-		  private void ListaProducto() {
+
+	private void ListaProducto() {
 		{
 		    final String uri = "http://localhost:8080/WebService/ListaProducto";
 

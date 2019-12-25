@@ -19,21 +19,38 @@ public class Producto implements Serializable {
 	private String descripcion;
 
 	private String nombre;
+	private int idclothing;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
-	//bi-directional many-to-one association to Clothing
-	@ManyToOne
-	@JoinColumn(name="idclothing")
-	private Clothing clothing;
+	public int getIdclothing() {
+		return idclothing;
+	}
 
-	//bi-directional many-to-one association to Imagen
-	@ManyToOne
-	@JoinColumn(name="Idimagen")
-	private Imagen imagen;
+	public int getIdimagen() {
+		return Idimagen;
+	}
 
-	//bi-directional many-to-one association to Stock
-	@ManyToOne
-	@JoinColumn(name="idstock")
-	private Stock stock;
+	public int getIdstock() {
+		return idstock;
+	}
+
+	public void setIdclothing(int idclothing) {
+		this.idclothing = idclothing;
+	}
+
+	public void setIdimagen(int idimagen) {
+		Idimagen = idimagen;
+	}
+
+	public void setIdstock(int idstock) {
+		this.idstock = idstock;
+	}
+
+	private int Idimagen;
+	private int idstock;
+
 
 	public Producto() {
 	}
@@ -62,28 +79,6 @@ public class Producto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Clothing getClothing() {
-		return this.clothing;
-	}
 
-	public void setClothing(Clothing clothing) {
-		this.clothing = clothing;
-	}
-
-	public Imagen getImagen() {
-		return this.imagen;
-	}
-
-	public void setImagen(Imagen imagen) {
-		this.imagen = imagen;
-	}
-
-	public Stock getStock() {
-		return this.stock;
-	}
-
-	public void setStock(Stock stock) {
-		this.stock = stock;
-	}
 
 }

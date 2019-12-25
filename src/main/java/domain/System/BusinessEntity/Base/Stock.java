@@ -18,6 +18,37 @@ public class Stock implements Serializable {
 
 	@Id
 	private int idstock;
+	private int idProducto;
+	private int idprecio;
+	public int getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(int idPedido) {
+		this.idPedido = idPedido;
+	}
+
+	private int idPedido;
+	
+	public int getIdprecio() {
+		return idprecio;
+	}
+
+	public void setIdprecio(int idprecio) {
+		this.idprecio = idprecio;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public int getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(int idProducto) {
+		this.idProducto = idProducto;
+	}
 
 	private BigDecimal count;
 

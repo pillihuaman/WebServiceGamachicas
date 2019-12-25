@@ -5,6 +5,35 @@ public class ViewStockBE {
 	   private Color Color;
 	   private Clothingline Clothingline;
 	   private Detailimagen Detailimagen;
+		private  Imagen Imagen;
+		private Test Test;
+	   public Producto getProducto() {
+		return Producto;
+	}
+
+	public void setProducto(Producto producto) {
+		Producto = producto;
+	}
+
+	public Stock getStock() {
+		return Stock;
+	}
+
+	public void setStock(Stock stock) {
+		Stock = stock;
+	}
+
+	public Price getPrice() {
+		return Price;
+	}
+
+	public void setPrice(Price price) {
+		Price = price;
+	}
+
+	private Producto Producto;
+	   private Stock Stock;
+	   private Price Price;
 	 
       public Detailimagen getDetailimagen() {
 		return Detailimagen;
@@ -23,8 +52,6 @@ public class ViewStockBE {
 		Imagen = imagen;
 	}
 
-	private  Imagen Imagen;
-	private Test Test;
 
 
 
