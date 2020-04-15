@@ -6,14 +6,13 @@ import domain.System.BusinessEntity.Base.*;
 
 public class ListImagenByIdProductModelAndView {
 	
-	 public List<HomeViewModel> getListImagenByIdProduct() {
-		return listImagenByIdProduct;
-	}
 
-	public void setListImagenByIdProduct(List<HomeViewModel> listImagenByIdProduct) {
-		this.listImagenByIdProduct = listImagenByIdProduct;
-	}
 
-	private List<HomeViewModel> listImagenByIdProduct ;
+	private List<HomeViewModel> LstHomeViewModel ;
+	
+	
+
 	
 }
+
+

@@ -4,10 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import common.system.ViewModel.ListImagenByIdProductModelAndView;
 import common.system.ViewModel.ModelEntities;
 import domain.System.BusinessEntity.ViewStockBE;
+import domain.System.BusinessEntity.Base.Detailproduct;
+import domain.System.BusinessEntity.Base.HomeViewModel;
+import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.Base.Producto;
 import domain.System.BusinessEntity.Base.Stock;
 import domain.System.BusinessEntity.BusinessLogic.WebServiceBL;
@@ -41,10 +45,51 @@ public class WebService implements IWebService {
 		return  WebServiceBL.ListProduct();
 	}
 	@Override
-	public ListImagenByIdProductModelAndView ListImagenByIdProduct(Producto pro) {
+	public List<HomeViewModel>  ListImagenByIdProduct(Producto pro) {
 		// TODO Auto-generated method stub
 		return WebServiceBL.ListImagenByIdProduct(pro);
 	}
+
+	@Override
+	public List<HomeViewModel> ListDetImagenByIdProduct(Producto pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ListDetImagenByIdProduct(pro);
+	}
+	@Override
+	public Imagen ImagenSel(Imagen img) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ImagenSel(img);
+	}
+	
+	@Override
+	public List<HomeViewModel>  ListDetImagenByIdImagen(Imagen img) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ListDetImagenByIdImagen(img);
+	}
+	@Override
+	public Producto  ProductoSel(Producto pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ProductoSel(pro);
+	}
+	@Override
+	public HomeViewModel HomeViewModelSelByIdDroducto(Producto pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.HomeViewModelSelByIdDroducto(pro);
+	}
+
+	@Override
+	public boolean DetailProductIns(@RequestBody Detailproduct pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.DetailProductIns(pro);
+	}
+	@Override
+	public List<Detailproduct> ListDetailProductByIdProduct( Detailproduct pro) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.ListDetailProductByIdProduct(pro);
+	}
+	
+
+
 
 
 

@@ -43,6 +43,7 @@ public class ProductController {
 		   //Imagen img = new Imagen();
 		   //mdod.setClothingline(ob);
 		   //mdod.setImagen(img);
+		   
     	 return new ModelAndView("registerProduct", "command", new ViewProductBE());
     }
     
