@@ -10,7 +10,6 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="parameter")
 @NamedQuery(name="Parameter.findAll", query="SELECT p FROM Parameter p")
 public class Parameter implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -20,13 +19,17 @@ public class Parameter implements Serializable {
 
 	private Timestamp createdate;
 
-	@Column(name="NAME")
+	private String description;
+
+	private int idGroupparameter;
+
 	private String name;
 
-	@Column(name="STATUS")
-	private Object status;
+	private boolean status;
 
 	private Timestamp updatedate;
+
+	private String value;
 
 	public Parameter() {
 	}
@@ -47,6 +50,22 @@ public class Parameter implements Serializable {
 		this.createdate = createdate;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getIdGroupparameter() {
+		return this.idGroupparameter;
+	}
+
+	public void setIdGroupparameter(int idGroupparameter) {
+		this.idGroupparameter = idGroupparameter;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -55,11 +74,11 @@ public class Parameter implements Serializable {
 		this.name = name;
 	}
 
-	public Object getStatus() {
+	public boolean getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Object status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 
@@ -69,6 +88,14 @@ public class Parameter implements Serializable {
 
 	public void setUpdatedate(Timestamp updatedate) {
 		this.updatedate = updatedate;
+	}
+
+	public String getValue() {
+		return this.value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 }

@@ -7,12 +7,12 @@ public class ViewStockBE {
 	   private Detailimagen Detailimagen;
 		private  Imagen Imagen;
 		private Test Test;
-	   public Producto getProducto() {
-		return Producto;
+	   public Product getProducto() {
+		return Product;
 	}
 
-	public void setProducto(Producto producto) {
-		Producto = producto;
+	public void setProducto(Product producto) {
+		Product = producto;
 	}
 
 	public Stock getStock() {
@@ -31,7 +31,7 @@ public class ViewStockBE {
 		Price = price;
 	}
 
-	private Producto Producto;
+	private Product Product;
 	   private Stock Stock;
 	   private Price Price;
 	 

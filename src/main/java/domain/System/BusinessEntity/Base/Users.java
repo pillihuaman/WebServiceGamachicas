@@ -1,179 +1,185 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.math.BigInteger;
+
 
 /**
- *
- * @author zarmir
+ * The persistent class for the users database table.
+ * 
  */
 @Entity
-@Table(name = "USERS")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
-    @NamedQuery(name = "Users.findByIduser", query = "SELECT u FROM Users u WHERE u.iduser = :iduser"),
-    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name"),
-    @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
-    @NamedQuery(name = "Users.findByCreatedate", query = "SELECT u FROM Users u WHERE u.createdate = :createdate"),
-    @NamedQuery(name = "Users.findByUpdatedate", query = "SELECT u FROM Users u WHERE u.updatedate = :updatedate"),
-    @NamedQuery(name = "Users.findByStatus", query = "SELECT u FROM Users u WHERE u.status = :status")})
+@Table(name="users")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class Users implements Serializable {
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "IDUSER")
-    private BigDecimal iduser;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    @Column(name = "NAME")
-    private String name;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "EMAIL")
-    private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "PASSWORD")
-    private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CREATEDATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdate;
-    @Column(name = "UPDATEDATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedate;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "STATUS")
-    private short status;
+	private static final long serialVersionUID = 1L;
 
-    public Users() {
-    }
+	@Id
+	private int idUser;
 
-    public Users(BigDecimal iduser) {
-        this.iduser = iduser;
-    }
+	private String alias;
 
-    public Users(BigDecimal iduser, String name, String email, String password, Date createdate, short status) {
-        this.iduser = iduser;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.createdate = createdate;
-        this.status = status;
-    }
-    public Users(String email, String password)
-    {
-        this.password = password;
-        this.email = email;
-    }
+	private String apiPassword;
 
-    public BigDecimal getIduser() {
-        return iduser;
-    }
+	private Timestamp createDate;
 
-    public void setIduser(BigDecimal iduser) {
-        this.iduser = iduser;
-    }
+	@Column(name="CURRENT_CONNECTIONS")
+	private BigInteger currentConnections;
 
-    public String getName() {
-        return name;
-    }
+	private int idRol;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	private int idSystem;
 
-    public String getEmail() {
-        return email;
-    }
+	private String mail;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	private String mobilPhone;
 
-    public String getPassword() {
-        return password;
-    }
+	private String password;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	private String salPassword;
 
-    public Date getCreatedate() {
-        return createdate;
-    }
+	private byte status;
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+	@Column(name="TOTAL_CONNECTIONS")
+	private BigInteger totalConnections;
 
-    public Date getUpdatedate() {
-        return updatedate;
-    }
+	private Timestamp updateDate;
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate = updatedate;
-    }
+	private String user;
 
-    public short getStatus() {
-        return status;
-    }
+	private String username;
 
-    public void setStatus(short status) {
-        this.status = status;
-    }
+	public Users() {
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (iduser != null ? iduser.hashCode() : 0);
-        return hash;
-    }
+	public int getIdUser() {
+		return this.idUser;
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
-            return false;
-        }
-        Users other = (Users) object;
-        if ((this.iduser == null && other.iduser != null) || (this.iduser != null && !this.iduser.equals(other.iduser))) {
-            return false;
-        }
-        return true;
-    }
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
 
-    @Override
-    public String toString() {
-        return "Domain.System.BusinessEntity.Base.Users[ iduser=" + iduser + " ]";
-    }
-    
+	public String getAlias() {
+		return this.alias;
+	}
+
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+
+	public String getApiPassword() {
+		return this.apiPassword;
+	}
+
+	public void setApiPassword(String apiPassword) {
+		this.apiPassword = apiPassword;
+	}
+
+	public Timestamp getCreateDate() {
+		return this.createDate;
+	}
+
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
+	}
+
+	public BigInteger getCurrentConnections() {
+		return this.currentConnections;
+	}
+
+	public void setCurrentConnections(BigInteger currentConnections) {
+		this.currentConnections = currentConnections;
+	}
+
+	public int getIdRol() {
+		return this.idRol;
+	}
+
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
+	}
+
+	public int getIdSystem() {
+		return this.idSystem;
+	}
+
+	public void setIdSystem(int idSystem) {
+		this.idSystem = idSystem;
+	}
+
+	public String getMail() {
+		return this.mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getMobilPhone() {
+		return this.mobilPhone;
+	}
+
+	public void setMobilPhone(String mobilPhone) {
+		this.mobilPhone = mobilPhone;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalPassword() {
+		return this.salPassword;
+	}
+
+	public void setSalPassword(String salPassword) {
+		this.salPassword = salPassword;
+	}
+
+	public byte getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(byte status) {
+		this.status = status;
+	}
+
+	public BigInteger getTotalConnections() {
+		return this.totalConnections;
+	}
+
+	public void setTotalConnections(BigInteger totalConnections) {
+		this.totalConnections = totalConnections;
+	}
+
+	public Timestamp getUpdateDate() {
+		return this.updateDate;
+	}
+
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
+	}
+
+	public String getUser() {
+		return this.user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 }

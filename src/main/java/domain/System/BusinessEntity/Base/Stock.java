@@ -11,164 +11,112 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="stock")
 @NamedQuery(name="Stock.findAll", query="SELECT s FROM Stock s")
 public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idstock;
-	private int idProducto;
-	private int idprecio;
-	public int getIdPedido() {
-		return idPedido;
-	}
+	private int idStock;
 
-	public void setIdPedido(int idPedido) {
-		this.idPedido = idPedido;
-	}
+	private BigDecimal amount;
 
-	private int idPedido;
-	
-	public int getIdprecio() {
-		return idprecio;
-	}
+	private Timestamp createDate;
 
-	public void setIdprecio(int idprecio) {
-		this.idprecio = idprecio;
-	}
+	private int IDPlace;
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	private int idProduct;
 
-	public int getIdProducto() {
-		return idProducto;
-	}
+	private int idSystem;
 
-	public void setIdProducto(int idProducto) {
-		this.idProducto = idProducto;
-	}
+	private int idUnit;
 
-	private BigDecimal count;
+	private int idUser;
 
-	private Timestamp createdate;
+	private byte status;
 
-	private String description;
-
-	private BigDecimal idclothing;
-
-	private BigDecimal idclothingline;
-
-	private BigDecimal idcolor;
-
-	private BigDecimal iddescription;
-
-	private BigDecimal idusercreate;
-
-	private BigDecimal price;
-
-	private Object status;
-
-	private Timestamp updatedate;
+	private Timestamp updateDate;
 
 	public Stock() {
 	}
 
-	public int getIdstock() {
-		return this.idstock;
+	public int getIdStock() {
+		return this.idStock;
 	}
 
-	public void setIdstock(int idstock) {
-		this.idstock = idstock;
+	public void setIdStock(int idStock) {
+		this.idStock = idStock;
 	}
 
-	public BigDecimal getCount() {
-		return this.count;
+	public BigDecimal getAmount() {
+		return this.amount;
 	}
 
-	public void setCount(BigDecimal count) {
-		this.count = count;
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 
-	public Timestamp getCreatedate() {
-		return this.createdate;
+	public Timestamp getCreateDate() {
+		return this.createDate;
 	}
 
-	public void setCreatedate(Timestamp createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
 
-	public String getDescription() {
-		return this.description;
+	public int getIDPlace() {
+		return this.IDPlace;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setIDPlace(int IDPlace) {
+		this.IDPlace = IDPlace;
 	}
 
-	public BigDecimal getIdclothing() {
-		return this.idclothing;
+	public int getIdProduct() {
+		return this.idProduct;
 	}
 
-	public void setIdclothing(BigDecimal idclothing) {
-		this.idclothing = idclothing;
+	public void setIdProduct(int idProduct) {
+		this.idProduct = idProduct;
 	}
 
-	public BigDecimal getIdclothingline() {
-		return this.idclothingline;
+	public int getIdSystem() {
+		return this.idSystem;
 	}
 
-	public void setIdclothingline(BigDecimal idclothingline) {
-		this.idclothingline = idclothingline;
+	public void setIdSystem(int idSystem) {
+		this.idSystem = idSystem;
 	}
 
-	public BigDecimal getIdcolor() {
-		return this.idcolor;
+	public int getIdUnit() {
+		return this.idUnit;
 	}
 
-	public void setIdcolor(BigDecimal idcolor) {
-		this.idcolor = idcolor;
+	public void setIdUnit(int idUnit) {
+		this.idUnit = idUnit;
 	}
 
-	public BigDecimal getIddescription() {
-		return this.iddescription;
+	public int getIdUser() {
+		return this.idUser;
 	}
 
-	public void setIddescription(BigDecimal iddescription) {
-		this.iddescription = iddescription;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
-	public BigDecimal getIdusercreate() {
-		return this.idusercreate;
-	}
-
-	public void setIdusercreate(BigDecimal idusercreate) {
-		this.idusercreate = idusercreate;
-	}
-
-	public BigDecimal getPrice() {
-		return this.price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public Object getStatus() {
+	public byte getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Object status) {
+	public void setStatus(byte status) {
 		this.status = status;
 	}
 
-	public Timestamp getUpdatedate() {
-		return this.updatedate;
+	public Timestamp getUpdateDate() {
+		return this.updateDate;
 	}
 
-	public void setUpdatedate(Timestamp updatedate) {
-		this.updatedate = updatedate;
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
 	}
 
 }

@@ -1,7 +1,6 @@
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -11,35 +10,35 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="imagen")
 @NamedQuery(name="Imagen.findAll", query="SELECT i FROM Imagen i")
 public class Imagen implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private int idimagen;
+	private int idImagen;
 
 	private int countViews;
 
 	private Timestamp createdate;
 
-	@Column(name="DESCRIPTION")
 	private String description;
 
-	private int idclothing;
+	private int idProduct;
 
-	private int idclothingline;
+	private int idSystem;
 
-	private int idposition;
+	private int idUser;
 
+	private String imagenCode;
+
+	@Lob
 	private byte[] imagendata;
 
 	private String name;
 
-	private int positionweb;
+	private int positionWeb;
 
-	@Column(name="STATUS")
-	private Object status;
+	private byte status;
 
 	private Timestamp updatedate;
 
@@ -48,12 +47,12 @@ public class Imagen implements Serializable {
 	public Imagen() {
 	}
 
-	public int getIdimagen() {
-		return this.idimagen;
+	public int getIdImagen() {
+		return this.idImagen;
 	}
 
-	public void setIdimagen(int idimagen) {
-		this.idimagen = idimagen;
+	public void setIdImagen(int idImagen) {
+		this.idImagen = idImagen;
 	}
 
 	public int getCountViews() {
@@ -80,35 +79,43 @@ public class Imagen implements Serializable {
 		this.description = description;
 	}
 
-	public int getIdclothing() {
-		return this.idclothing;
+	public int getIdProduct() {
+		return this.idProduct;
 	}
 
-	public void setIdclothing(int idclothing) {
-		this.idclothing = idclothing;
+	public void setIdProduct(int idProduct) {
+		this.idProduct = idProduct;
 	}
 
-	public int getIdclothingline() {
-		return this.idclothingline;
+	public int getIdSystem() {
+		return this.idSystem;
 	}
 
-	public void setIdclothingline(int idclothingline) {
-		this.idclothingline = idclothingline;
+	public void setIdSystem(int idSystem) {
+		this.idSystem = idSystem;
 	}
 
-	public int getIdposition() {
-		return this.idposition;
+	public int getIdUser() {
+		return this.idUser;
 	}
 
-	public void setIdposition(int idposition) {
-		this.idposition = idposition;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 
-	public byte[]  getImagendata() {
+	public String getImagenCode() {
+		return this.imagenCode;
+	}
+
+	public void setImagenCode(String imagenCode) {
+		this.imagenCode = imagenCode;
+	}
+
+	public byte[] getImagendata() {
 		return this.imagendata;
 	}
 
-	public void setImagendata(byte[]  imagendata) {
+	public void setImagendata(byte[] imagendata) {
 		this.imagendata = imagendata;
 	}
 
@@ -120,19 +127,19 @@ public class Imagen implements Serializable {
 		this.name = name;
 	}
 
-	public int getPositionweb() {
-		return this.positionweb;
+	public int getPositionWeb() {
+		return this.positionWeb;
 	}
 
-	public void setPositionweb(int positionweb) {
-		this.positionweb = positionweb;
+	public void setPositionWeb(int positionWeb) {
+		this.positionWeb = positionWeb;
 	}
 
-	public Object getStatus() {
+	public byte getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Object status) {
+	public void setStatus(byte status) {
 		this.status = status;
 	}
 

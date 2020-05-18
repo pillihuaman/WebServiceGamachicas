@@ -84,7 +84,7 @@ public class stockClothesDA {
 	        	            .createQuery(sql)
 	        	            .addParameter("idclothing", 1)
 	        	            .executeAndFetch(Imagen.class);
-	        	   // result.forEach(System.out::println);
+	        	   // result.forEach(Systems.out::println);
 	          }
 			return null;
 		} catch (IOException e) {

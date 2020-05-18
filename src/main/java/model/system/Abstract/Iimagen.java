@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import domain.System.BusinessEntity.CrudImagenBE;
-import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Imagen;
@@ -23,6 +22,6 @@ public interface Iimagen {
 	int insertDetailImagen (ViewStockBE ViewStockBE);
 	int   InsertImagen( CrudImagenBE CrudImagenBE) throws SQLException, IOException;
 	int   InsertDetalleImagen( ViewStockBE ViewStockBE) throws SQLException, IOException; 
-	int   InsertProduct( ViewProductBE ViewProductBE) throws SQLException, IOException; 
+	 
 
 }

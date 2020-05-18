@@ -16,7 +16,6 @@ import org.eclipse.jdt.internal.compiler.codegen.TypeAnnotationCodeStream;
 import org.sql2o.Sql2o;
 //import com.google.protobuf.DescriptorProtos.SourceCodeInfo.Location;
 import domain.System.BusinessEntity.CrudImagenBE;
-import domain.System.BusinessEntity.ViewProductBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
@@ -41,19 +40,19 @@ public class ImagenDa {
 			String sql = "INSERT INTO Gamachicas.imagen(name,idclothing,idposition,positionweb,countViews,imagendata,url,DESCRIPTION,STATUS,createdate,updatedate,idclothingline) "
 					+ "VALUES(:name,:idclothing,:idposition,:positionweb,:countViews,:imagendata,:url,:DESCRIPTION,:STATUS,:createdate,:updatedate,:idclothingline)";
 			try (org.sql2o.Connection con = sql2o.open()) {
-				idImagen1 = (BigInteger) con.createQuery(sql, true)
-						.addParameter("name", CrudImagenBE.getImagen().getName())
-						.addParameter("idclothing", CrudImagenBE.getImagen().getIdclothing())
-						.addParameter("idposition", CrudImagenBE.getImagen().getIdposition())
-						.addParameter("positionweb", CrudImagenBE.getImagen().getPositionweb())
-						.addParameter("countViews", CrudImagenBE.getImagen().getCountViews())
-						.addParameter("imagendata", CrudImagenBE.getImagen().getImagendata())
-						.addParameter("url", "fsdfs")
-						.addParameter("DESCRIPTION", CrudImagenBE.getImagen().getDescription())
-						.addParameter("STATUS", true).addParameter("createdate", LocalDateTime.now())
-						.addParameter("updatedate", LocalDateTime.now())
-						.addParameter("idclothingline", CrudImagenBE.getImagen().getIdclothingline()).executeUpdate()
-						.getKey();
+//				idImagen1 = (BigInteger) con.createQuery(sql, true)
+//						.addParameter("name", CrudImagenBE.getImagen().getName())
+//						//.addParameter("idclothing", CrudImagenBE.getImagen().getIdclothing())
+//						.addParameter("idposition", CrudImagenBE.getImagen().getIdposition())
+//						.addParameter("positionweb", CrudImagenBE.getImagen().getPositionweb())
+//						.addParameter("countViews", CrudImagenBE.getImagen().getCountViews())
+//						.addParameter("imagendata", CrudImagenBE.getImagen().getImagendata())
+//						.addParameter("url", "fsdfs")
+//						.addParameter("DESCRIPTION", CrudImagenBE.getImagen().getDescription())
+//						.addParameter("STATUS", true).addParameter("createdate", LocalDateTime.now())
+//						.addParameter("updatedate", LocalDateTime.now())
+//						.addParameter("idclothingline", CrudImagenBE.getImagen().getIdclothingline()).executeUpdate()
+//						.getKey();
 
 			}
 
@@ -80,10 +79,10 @@ public class ImagenDa {
 					+ "VALUES(:idimagen,:Descripcion,:vista,:imagendata,:url,:createdate,:updatedate,:status);";
 			try (org.sql2o.Connection con = sql2o.open()) {
 				idImagen1 = (int) con.createQuery(sql, true)
-						.addParameter("idimagen", ViewStockBE.getDetailimagen().getIdimagen())
-						.addParameter("Descripcion", ViewStockBE.getDetailimagen().getDescripcion())
-						.addParameter("vista", ViewStockBE.getDetailimagen().getVista())
-						.addParameter("imagendata", ViewStockBE.getDetailimagen().getImagendata())
+//						.addParameter("idimagen", ViewStockBE.getDetailimagen().getIdimagen())
+//						.addParameter("Descripcion", ViewStockBE.getDetailimagen().getDescripcion())
+//						.addParameter("vista", ViewStockBE.getDetailimagen().getVista())
+//						.addParameter("imagendata", ViewStockBE.getDetailimagen().getImagendata())
 						.addParameter("url", "url test").addParameter("createdate", LocalDateTime.now())
 						.addParameter("updatedate", LocalDateTime.now()).addParameter("status", true).executeUpdate()
 						.getKey();
@@ -232,14 +231,14 @@ public class ImagenDa {
 			dbConnection = MySqlAdapter.connectDatabase();
 			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
 			callableStatement.setString(1, CrudImagenBE.getImagen().getName());
-			callableStatement.setInt(2, CrudImagenBE.getImagen().getIdclothing());
-			callableStatement.setInt(3, CrudImagenBE.getImagen().getIdposition());
-			callableStatement.setInt(4, CrudImagenBE.getImagen().getPositionweb());
+//			callableStatement.setInt(2, CrudImagenBE.getImagen().getIdclothing());
+//			callableStatement.setInt(3, CrudImagenBE.getImagen().getIdposition());
+			callableStatement.setInt(4, CrudImagenBE.getImagen().getPositionWeb());
 			callableStatement.setInt(5, CrudImagenBE.getImagen().getCountViews());
 			callableStatement.setBytes(6, CrudImagenBE.getImagen().getImagendata());
 			callableStatement.setString(7, CrudImagenBE.getImagen().getUrl());
 			callableStatement.setString(8, CrudImagenBE.getImagen().getDescription());
-			callableStatement.setInt(9, CrudImagenBE.getImagen().getIdclothingline());
+//			callableStatement.setInt(9, CrudImagenBE.getImagen().getIdclothingline());
 			callableStatement.registerOutParameter(10, java.sql.Types.INTEGER);
 			// callableStatement.executeUpdate();
 			boolean hasresult = callableStatement.execute();
@@ -282,10 +281,10 @@ public class ImagenDa {
 		try {
 			dbConnection = MySqlAdapter.connectDatabase();
 			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
-			callableStatement.setInt(1, ViewStockBE.getDetailimagen().getIdimagen());
-			callableStatement.setString(2, ViewStockBE.getDetailimagen().getDescripcion());
+//			callableStatement.setInt(1, ViewStockBE.getDetailimagen().getIdimagen());
+//			callableStatement.setString(2, ViewStockBE.getDetailimagen().getDescripcion());
 			callableStatement.setInt(3, ViewStockBE.getDetailimagen().getVista());
-			callableStatement.setBytes(4, ViewStockBE.getDetailimagen().getImagendata());
+//			callableStatement.setBytes(4, ViewStockBE.getDetailimagen().getImagendata());
 			// callableStatement.setInt(5, " ");
 			// callableStatement.setBoolean(5, true);
 			callableStatement.registerOutParameter(5, java.sql.Types.INTEGER);
@@ -318,44 +317,47 @@ public class ImagenDa {
 		return idimagen;
 	}
 
-	public static int InsertProduct(ViewProductBE ViewProductBE) throws SQLException, IOException {
-		int idimagen = 0;
-		Connection dbConnection = null;
-		CallableStatement callableStatement = null;
 
-		List<CrudImagenBE> lst = new ArrayList<CrudImagenBE>();
-		String getDBUSERCursorSql = "{call sp_InsertProduct (?,?,?,?,?,?,?,?,?)}";
-
-		try {
-			dbConnection = MySqlAdapter.connectDatabase();
-			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
-			callableStatement.setString(1, ViewProductBE.getImagen().getName());
-			callableStatement.setInt(2, ViewProductBE.getImagen().getPositionweb());
-			callableStatement.setInt(3, ViewProductBE.getImagen().getCountViews());
-			callableStatement.setBytes(4, ViewProductBE.getImagen().getImagendata());
-			callableStatement.setString(5, ViewProductBE.getImagen().getDescription());
-			callableStatement.setInt(6, ViewProductBE.getClothingline().getIdclothingline());
-			callableStatement.setDouble(7, ViewProductBE.getPrice().getPreciomayor());
-			callableStatement.setDouble(8, ViewProductBE.getPrice().getPreciomenor());
-			callableStatement.registerOutParameter(9, java.sql.Types.INTEGER);
-			// callableStatement.executeUpdate();
-			boolean hasresult = callableStatement.execute();
-			// ResultSet rs = callableStatement.getGeneratedKeys();
-			if (hasresult) {
-				try (ResultSet myRs = callableStatement.getResultSet()) {
-					while (myRs.next()) {
-						idimagen = myRs.getInt("idproducto");
-
-						System.out.print(idimagen);
-					} // end of while
-
-				} // end of resultset
-			}
-		} catch (SQLException e) {
-
-			System.out.println(e.getMessage());
-
-		}
-		return idimagen;
-	}}
+//	public static int InsertProduct(ViewProductBE ViewProductBE) throws SQLException, IOException {
+//		int idimagen = 0;
+//		Connection dbConnection = null;
+//		CallableStatement callableStatement = null;
+//
+//		List<CrudImagenBE> lst = new ArrayList<CrudImagenBE>();
+//		String getDBUSERCursorSql = "{call sp_InsertProduct (?,?,?,?,?,?,?,?,?)}";
+//
+//		try {
+//			dbConnection = MySqlAdapter.connectDatabase();
+//			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
+//			callableStatement.setString(1, ViewProductBE.getImagen().getName());
+//			callableStatement.setInt(2, ViewProductBE.getImagen().getPositionweb());
+//			callableStatement.setInt(3, ViewProductBE.getImagen().getCountViews());
+//			callableStatement.setBytes(4, ViewProductBE.getImagen().getImagendata());
+//			callableStatement.setString(5, ViewProductBE.getImagen().getDescription());
+//			callableStatement.setInt(6, ViewProductBE.getClothingline().getIdclothingline());
+//			callableStatement.setDouble(7, ViewProductBE.getPrice().getPreciomayor());
+//			callableStatement.setDouble(8, ViewProductBE.getPrice().getPreciomenor());
+//			callableStatement.registerOutParameter(9, java.sql.Types.INTEGER);
+//			// callableStatement.executeUpdate();
+//			boolean hasresult = callableStatement.execute();
+//			// ResultSet rs = callableStatement.getGeneratedKeys();
+//			if (hasresult) {
+//				try (ResultSet myRs = callableStatement.getResultSet()) {
+//					while (myRs.next()) {
+//						idimagen = myRs.getInt("idproducto");
+//
+//						Systems.out.print(idimagen);
+//					} // end of while
+//
+//				} // end of resultset
+//			}
+//		} catch (SQLException e) {
+//
+//			Systems.out.println(e.getMessage());
+//
+//		}
+//		return idimagen;
+//	}
+}
+	
 

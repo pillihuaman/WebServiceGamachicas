@@ -1,7 +1,6 @@
 package domain.System.BusinessEntity.Base;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -18,37 +17,17 @@ public class Detailimagen implements Serializable {
 	@Id
 	private int idDetailImagen;
 
-	private Timestamp createdate;
+	private Timestamp createDate;
 
-	private String descripcion;
+	private int idImagen;
 
-	private int idimagen;
+	private byte status;
 
-	@Lob
-	private byte[] imagendata;
-
-	@Column(name="STATUS")
-	private Object status;
-	//private byte status;
-
-	private Timestamp updatedate;
+	private Timestamp updateDate;
 
 	private String url;
 
 	private int vista;
-	public int getIdGroupparemeter() {
-		return IdGroupparemeter;
-	}
-
-	public void setIdGroupparemeter(int idGroupparemeter) {
-		IdGroupparemeter = idGroupparemeter;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	private int IdGroupparemeter; 
 
 	public Detailimagen() {
 	}
@@ -61,52 +40,36 @@ public class Detailimagen implements Serializable {
 		this.idDetailImagen = idDetailImagen;
 	}
 
-	public Timestamp getCreatedate() {
-		return this.createdate;
+	public Timestamp getCreateDate() {
+		return this.createDate;
 	}
 
-	public void setCreatedate(Timestamp createdate) {
-		this.createdate = createdate;
+	public void setCreateDate(Timestamp createDate) {
+		this.createDate = createDate;
 	}
 
-	public String getDescripcion() {
-		return this.descripcion;
+	public int getIdImagen() {
+		return this.idImagen;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setIdImagen(int idImagen) {
+		this.idImagen = idImagen;
 	}
 
-	public int getIdimagen() {
-		return this.idimagen;
-	}
-
-	public void setIdimagen(int idimagen) {
-		this.idimagen = idimagen;
-	}
-
-	public byte[] getImagendata() {
-		return this.imagendata;
-	}
-
-	public void setImagendata(byte[] imagendata) {
-		this.imagendata = imagendata;
-	}
-
-	public Object getStatus() {
+	public byte getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(Object status) {
+	public void setStatus(byte status) {
 		this.status = status;
 	}
 
-	public Timestamp getUpdatedate() {
-		return this.updatedate;
+	public Timestamp getUpdateDate() {
+		return this.updateDate;
 	}
 
-	public void setUpdatedate(Timestamp updatedate) {
-		this.updatedate = updatedate;
+	public void setUpdateDate(Timestamp updateDate) {
+		this.updateDate = updateDate;
 	}
 
 	public String getUrl() {
