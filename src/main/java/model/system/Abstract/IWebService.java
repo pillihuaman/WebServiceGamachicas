@@ -20,26 +20,19 @@ import domain.System.BusinessEntity.Base.Stock;
 
 public interface IWebService {
 	ModelEntities listaProductos();
-
 	List<ViewStockBE> listGeneralProductForm(int IdImagen) throws SQLException, Exception;
 	boolean InsertStock(Stock stock);
-	List<Product> ListProduct();
-	HomeViewModelResponse ListImagenByIdProduct(Product pro);
-	List<HomeViewModel> ListDetImagenByIdProduct(Product pro);
-	ImagenResponse ImagenSel(Imagen img);
+
+
 	List<HomeViewModel> ListDetImagenByIdImagen(Imagen pro);
-	ProductoResponse ProductoSel(Product pro);
-	HomeViewModel HomeViewModelSelByIdDroducto(Product pro);
-	boolean DetailProductIns(@RequestBody Detailproduct pro);
-	List<Detailproduct> ListDetailProductByIdProduct(Detailproduct pro);
+
+
 	List<Menu> MenuList( Groupparameter Groupparameter);
 	List<ParentMenu> parentmenuList( ParentMenu  ParentMenu);
 	List<Parameter> Parametersel(Parameter Parameter);
-	ProductoResponse SaveProduct(@RequestBody Product pro);
-	ImagenResponse ImagenIns( Imagen  Imagen);
-	ImagenResponse ImagenInss( Imagen  Imagen);
-	PriceResponse PriceIns(Price price);
-	HomeViewModelResponse HomeProductIns(HomeViewModel homeViewModel);
+
+
 	DetailImagenResponse DetailImagenIns(Detailimagen detailImagen);
+	
 	
 }

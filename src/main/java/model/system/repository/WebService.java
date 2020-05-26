@@ -43,54 +43,9 @@ public class WebService implements IWebService {
 		return  WebServiceBL.InsertStock(stock);
 	}
 
-	@Override
-	public List<Product> ListProduct() {
-		// TODO Auto-generated method stub
-		return  WebServiceBL.ListProduct();
-	}
-	@Override
-	public HomeViewModelResponse  ListImagenByIdProduct(Product pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ListImagenByIdProduct(pro);
-	}
-
-	@Override
-	public List<HomeViewModel> ListDetImagenByIdProduct(Product pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ListDetImagenByIdProduct(pro);
-	}
-	@Override
-	public ImagenResponse ImagenSel(Imagen img) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ImagenSel(img);
-	}
 	
-	@Override
-	public List<HomeViewModel>  ListDetImagenByIdImagen(Imagen img) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ListDetImagenByIdImagen(img);
-	}
-	@Override
-	public ProductoResponse  ProductoSel(Product pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ProductoSel(pro);
-	}
-	@Override
-	public HomeViewModel HomeViewModelSelByIdDroducto(Product pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.HomeViewModelSelByIdDroducto(pro);
-	}
+	
 
-	@Override
-	public boolean DetailProductIns(@RequestBody Detailproduct pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.DetailProductIns(pro);
-	}
-	@Override
-	public List<Detailproduct> ListDetailProductByIdProduct( Detailproduct pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ListDetailProductByIdProduct(pro);
-	}
 	@Override
 	public List<Menu> MenuList(@RequestBody Groupparameter Groupparameter) {
 		// TODO Auto-generated method stub
@@ -108,39 +63,26 @@ public class WebService implements IWebService {
 		return WebServiceBL.Parametersel(Parameter);
 	}
 
-	@Override
-	public ProductoResponse SaveProduct(Product pro) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.SaveProduct(pro);
-	}
 
-	@Override
-	public ImagenResponse ImagenIns(Imagen Imagen) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ImagenIns(Imagen);
-	}
 
-	@Override
-	public ImagenResponse ImagenInss(Imagen Imagen) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.ImagenInss(Imagen);
-	}
-	@Override
-	public PriceResponse PriceIns(Price price) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.PriceIns(price);
-	}
+//	@Override
+//	public PriceResponse PriceIns(Price price) {
+//		// TODO Auto-generated method stub
+//		return WebServiceBL.PriceIns(price);
+//	}
 
-	@Override
-	public HomeViewModelResponse HomeProductIns(HomeViewModel homeViewModel) {
-		// TODO Auto-generated method stub
-		return WebServiceBL.HomeProductIns(homeViewModel);
-	}
+
 
 	@Override
 	public DetailImagenResponse DetailImagenIns(Detailimagen detailImagen) {
 		// TODO Auto-generated method stub
 		return WebServiceBL.DetailImagenIns(detailImagen);
+	}
+
+	@Override
+	public List<HomeViewModel> ListDetImagenByIdImagen(Imagen pro) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

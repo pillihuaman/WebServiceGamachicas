@@ -14,12 +14,18 @@ import java.util.List;
 import org.eclipse.jdt.internal.compiler.ast.CastExpression;
 import org.eclipse.jdt.internal.compiler.codegen.TypeAnnotationCodeStream;
 import org.sql2o.Sql2o;
+
+import common.system.model.response.HomeViewModelResponse;
+import common.system.model.response.ImagenResponse;
 //import com.google.protobuf.DescriptorProtos.SourceCodeInfo.Location;
 import domain.System.BusinessEntity.CrudImagenBE;
 import domain.System.BusinessEntity.ViewStockBE;
 import domain.System.BusinessEntity.Base.Clothingline;
 import domain.System.BusinessEntity.Base.Detailimagen;
+import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
+import domain.System.BusinessEntity.Base.Price;
+import domain.System.BusinessEntity.Base.Product;
 import infrastructure.System.Adapters.EntityDBConnection;
 import infrastructure.System.Adapters.MySqlAdapter;
 
@@ -317,47 +323,261 @@ public class ImagenDa {
 		return idimagen;
 	}
 
+	public static HomeViewModelResponse ListImagenByIdProduct(Product pro) {
+		Connection dbConnection = null;
+		CallableStatement callableStatement = null;
+		ResultSet rs = null;
 
-//	public static int InsertProduct(ViewProductBE ViewProductBE) throws SQLException, IOException {
-//		int idimagen = 0;
-//		Connection dbConnection = null;
-//		CallableStatement callableStatement = null;
-//
-//		List<CrudImagenBE> lst = new ArrayList<CrudImagenBE>();
-//		String getDBUSERCursorSql = "{call sp_InsertProduct (?,?,?,?,?,?,?,?,?)}";
-//
-//		try {
-//			dbConnection = MySqlAdapter.connectDatabase();
-//			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
-//			callableStatement.setString(1, ViewProductBE.getImagen().getName());
-//			callableStatement.setInt(2, ViewProductBE.getImagen().getPositionweb());
-//			callableStatement.setInt(3, ViewProductBE.getImagen().getCountViews());
-//			callableStatement.setBytes(4, ViewProductBE.getImagen().getImagendata());
-//			callableStatement.setString(5, ViewProductBE.getImagen().getDescription());
-//			callableStatement.setInt(6, ViewProductBE.getClothingline().getIdclothingline());
-//			callableStatement.setDouble(7, ViewProductBE.getPrice().getPreciomayor());
-//			callableStatement.setDouble(8, ViewProductBE.getPrice().getPreciomenor());
-//			callableStatement.registerOutParameter(9, java.sql.Types.INTEGER);
-//			// callableStatement.executeUpdate();
-//			boolean hasresult = callableStatement.execute();
-//			// ResultSet rs = callableStatement.getGeneratedKeys();
-//			if (hasresult) {
-//				try (ResultSet myRs = callableStatement.getResultSet()) {
-//					while (myRs.next()) {
-//						idimagen = myRs.getInt("idproducto");
-//
-//						Systems.out.print(idimagen);
-//					} // end of while
-//
-//				} // end of resultset
-//			}
-//		} catch (SQLException e) {
-//
-//			Systems.out.println(e.getMessage());
-//
-//		}
-//		return idimagen;
-//	}
+		List<HomeViewModel> lsthome = new ArrayList<HomeViewModel>();
+
+		HomeViewModelResponse lsthomeres = new HomeViewModelResponse();
+		String getDBUSERCursorSql = "{CALL sp_ListImagenByIdProduct(?)}";
+		try {
+			try {
+				dbConnection = MySqlAdapter.connectDatabase();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
+			callableStatement.setInt(1, pro.getIdProduct());
+			callableStatement.execute();
+			ResultSet resultSet = callableStatement.getResultSet();
+			while (resultSet.next()) {
+				Imagen Imagen = new Imagen();
+				Product Producto = new Product();
+				Price Price = new Price();
+				HomeViewModel home = new HomeViewModel();
+				Producto.setName(resultSet.getString("name"));
+				Producto.setIdProduct(resultSet.getInt("idProduct"));
+				Price.setHigherPrice(resultSet.getBigDecimal("HigherPrice"));
+				Price.setSmallerPrice(resultSet.getBigDecimal("SmallerPrice"));
+				Imagen.setDescription(resultSet.getString("Description"));
+				Imagen.setCountViews(resultSet.getInt("CountViews"));
+				Imagen.setIdImagen(resultSet.getInt("idImagen"));
+				home.setImagen(Imagen);
+				home.setPrice(Price);
+				home.setProduct(Producto);
+				lsthome.add(home);
+			}
+			lsthomeres.setCode(200);
+			lsthomeres.setDescription("Response OK");
+			lsthomeres.setMessage("OK");
+			lsthomeres.setListHomeViewModel(lsthome);
+			resultSet.close();
+
+		} catch (SQLException e) {
+			lsthomeres.setCode(500);
+			lsthomeres.setDescription(e.getMessage());
+			lsthomeres.setMessage("Error Inesperado");
+			// lsthomeres.setHomeViewModel(lsthome);
+			// Systems.out.println(e.getMessage());
+
+		} finally {
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (callableStatement != null) {
+				try {
+					callableStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (dbConnection != null) {
+				try {
+					dbConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return lsthomeres;
+	}
+	public static HomeViewModelResponse ListImagenByTop(int count) {
+		Connection dbConnection = null;
+		CallableStatement callableStatement = null;
+		ResultSet rs = null;
+
+		List<HomeViewModel> lsthome = new ArrayList<HomeViewModel>();
+
+		HomeViewModelResponse lsthomeres = new HomeViewModelResponse();
+		String getDBUSERCursorSql = "{CALL sp_ListImagenByTop(?)}";
+		try {
+			try {
+				dbConnection = MySqlAdapter.connectDatabase();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			callableStatement = dbConnection.prepareCall(getDBUSERCursorSql);
+			callableStatement.setInt(1,count );
+			callableStatement.execute();
+			ResultSet resultSet = callableStatement.getResultSet();
+			while (resultSet.next()) {
+				Imagen Imagen = new Imagen();
+				Product Producto = new Product();
+				Price Price = new Price();
+				HomeViewModel home = new HomeViewModel();
+				Producto.setName(resultSet.getString("name"));
+				Producto.setIdProduct(resultSet.getInt("idProduct"));
+				Price.setHigherPrice(resultSet.getBigDecimal("HigherPrice"));
+				Price.setSmallerPrice(resultSet.getBigDecimal("SmallerPrice"));
+				Imagen.setDescription(resultSet.getString("Description"));
+				Imagen.setCountViews(resultSet.getInt("CountViews"));
+				Imagen.setIdImagen(resultSet.getInt("idImagen"));
+				home.setImagen(Imagen);
+				home.setPrice(Price);
+				home.setProduct(Producto);
+				lsthome.add(home);
+			}
+			lsthomeres.setCode(200);
+			lsthomeres.setDescription("Response OK");
+			lsthomeres.setMessage("OK");
+			lsthomeres.setListHomeViewModel(lsthome);
+			resultSet.close();
+
+		} catch (SQLException e) {
+			lsthomeres.setCode(500);
+			lsthomeres.setDescription(e.getMessage());
+			lsthomeres.setMessage("Error Inesperado");
+			// lsthomeres.setHomeViewModel(lsthome);
+			// Systems.out.println(e.getMessage());
+
+		} finally {
+
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (callableStatement != null) {
+				try {
+					callableStatement.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (dbConnection != null) {
+				try {
+					dbConnection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return lsthomeres;
+	}
+	public static ImagenResponse ImagenIns(Imagen Imagen) {
+		ImagenResponse imgResponse = new ImagenResponse();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			EntityDBConnection conne = MySqlAdapter.getConnectionString();
+			Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+			String sql = "INSERT INTO gamachicas.imagen\r\n" + "(\r\n" + "IdProduct\r\n" + ",IdSystem\r\n"
+					+ ",IdUser\r\n" + ",Name       \r\n" + ",PositionWeb\r\n" + ",CountViews \r\n" + ",imagendata \r\n"
+					+ ",url        \r\n" + ",Description\r\n" + ",Status     \r\n" + ",ImagenCode \r\n"
+					+ ",createdate \r\n" + ",updatedate)\r\n" + "VALUES(\r\n" + ":IdProduct \r\n" + ",:IdSystem \r\n"
+					+ ",:IdUser \r\n" + ",:Name \r\n" + ",:PositionWeb \r\n" + ",:CountViews \r\n" + ",:imagendata \r\n"
+					+ ",:url \r\n" + ",:Description \r\n" + ",:Status \r\n" + ",:ImagenCode \r\n" + ",:createdate \r\n"
+					+ ",:updatedate);";
+			try (org.sql2o.Connection con = sql2o.open()) {
+				int key = con.createQuery(sql, true).addParameter("IdProduct", Imagen.getIdProduct())
+						.addParameter("IdSystem", Imagen.getIdSystem()).addParameter("IdUser", Imagen.getIdUser())
+						.addParameter("Name", Imagen.getName()).addParameter("PositionWeb", Imagen.getPositionWeb())
+						.addParameter("CountViews", Imagen.getCountViews())
+						.addParameter("imagendata", Imagen.getImagendata()).addParameter("url", Imagen.getUrl())
+						.addParameter("Description", Imagen.getDescription()).addParameter("Status", Imagen.getStatus())
+						.addParameter("ImagenCode", Imagen.getImagenCode())
+						.addParameter("createdate", LocalDateTime.now()).addParameter("updatedate", LocalDateTime.now())
+						.executeUpdate().getKey(int.class);
+				Imagen.setIdImagen(key);
+				if (key == 0) {
+					con.rollback();
+				}
+			}
+			imgResponse.setCode(200);
+			imgResponse.setDescription("Response OK");
+			imgResponse.setMessage("OK");
+			imgResponse.setImagen(Imagen);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			imgResponse.setCode(500);
+			imgResponse.setDescription(e.getMessage());
+			imgResponse.setMessage("Error Inesperado");
+			imgResponse.setImagen(Imagen);
+			return imgResponse;
+		}
+		return imgResponse;
+	}
+	public static ImagenResponse ImagenInss(Imagen Imagen) {
+		ImagenResponse responseimg = new ImagenResponse();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			EntityDBConnection conne = MySqlAdapter.getConnectionString();
+			Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+			String sql = "INSERT INTO gamachicas.imagen\r\n" + "(\r\n" + "IdProduct\r\n" + ",IdSystem\r\n"
+					+ ",IdUser\r\n" + ",Name       \r\n" + ",PositionWeb\r\n" + ",CountViews \r\n" + ",imagendata \r\n"
+					+ ",url        \r\n" + ",Description\r\n" + ",Status     \r\n" + ",ImagenCode \r\n"
+					+ ",createdate \r\n" + ",updatedate)\r\n" + "VALUES(\r\n" + ":IdProduct \r\n" + ",:IdSystem \r\n"
+					+ ",:IdUser \r\n" + ",:Name \r\n" + ",:PositionWeb \r\n" + ",:CountViews \r\n" + ",:imagendata \r\n"
+					+ ",:url \r\n" + ",:Description \r\n" + ",:Status \r\n" + ",:ImagenCode \r\n" + ",:createdate \r\n"
+					+ ",:updatedate);";
+			responseimg.setFullpath("/WebServiceDA/ImagenInss");
+			try (org.sql2o.Connection con = sql2o.open()) {
+				con.createQuery(sql, true).addParameter("IdProduct", Imagen.getIdProduct())
+						.addParameter("IdSystem", Imagen.getIdSystem()).addParameter("IdUser", Imagen.getIdUser())
+						.addParameter("Name", Imagen.getName()).addParameter("PositionWeb", Imagen.getPositionWeb())
+						.addParameter("CountViews", Imagen.getCountViews())
+						.addParameter("imagendata", Imagen.getImagendata()).addParameter("url", Imagen.getUrl())
+						.addParameter("Description", Imagen.getDescription()).addParameter("Status", Imagen.getStatus())
+						.addParameter("ImagenCode", Imagen.getImagenCode())
+						.addParameter("createdate", LocalDateTime.now()).addParameter("updatedate", LocalDateTime.now())
+						.executeUpdate().getKey();
+			}
+			responseimg.setCode(200);
+			responseimg.setDescription("Response OK");
+			responseimg.setMessage("OK");
+			responseimg.setImagen(Imagen);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// e.printStackTrace();
+			responseimg.setCode(500);
+			responseimg.setDescription(e.getMessage());
+			responseimg.setMessage("Error Inesperado");
+			responseimg.setImagen(Imagen);
+			return responseimg;
+		}
+		return responseimg;
+	}
 }
 	
 
