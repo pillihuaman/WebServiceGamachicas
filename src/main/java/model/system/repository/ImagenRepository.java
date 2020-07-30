@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
+import common.system.model.response.DetailImagenResponse;
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ImagenResponse;
 import domain.System.BusinessEntity.CrudImagenBE;
@@ -110,6 +111,16 @@ public class ImagenRepository implements Iimagen{
 		// TODO Auto-generated method stub
 		return WebServiceBL.ImagenSel(img);
 	}
+
+
+	@Override
+	public DetailImagenResponse DetailImagenIns(Detailimagen detimg) {
+		// TODO Auto-generated method stub
+		return WebServiceBL.DetailImagenIns(detimg);
+	}
+
+
+
 
 
 }

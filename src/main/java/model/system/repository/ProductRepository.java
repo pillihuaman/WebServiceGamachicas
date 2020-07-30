@@ -15,7 +15,7 @@ import model.system.Abstract.IProduct;
 
 public class ProductRepository implements IProduct {
 	@Override
-	public List<Product> ListProduct() {
+	public ProductoResponse ListProduct() {
 		// TODO Auto-generated method stub
 		return  ProductBL.ListProduct();
 	}

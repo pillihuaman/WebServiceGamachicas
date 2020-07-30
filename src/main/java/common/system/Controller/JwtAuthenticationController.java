@@ -18,6 +18,8 @@ import common.system.JwtTokenUtil;
 import common.system.JwtUserDetailsService;
 import common.system.RequestResponse.JwtRequest;
 import common.system.RequestResponse.JwtResponse;
+import common.system.model.response.AuthenticationResponse;
+import domain.System.BusinessEntity.Base.Response;
 
 
 @RestController
@@ -35,8 +37,11 @@ public class JwtAuthenticationController {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
-		 //return ResponseEntity.ok().headers(responseHeaders).body(user);
-		return ResponseEntity.ok(token);
+		AuthenticationResponse auth= new AuthenticationResponse();
+		auth.setToken(token);	
+		auth.setId(1);
+		//return ResponseEntity.ok().headers(responseHeaders).body(user);
+		return ResponseEntity.ok(auth);
 	}
 
 	private void authenticate(String username, String password) throws Exception {

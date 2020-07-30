@@ -327,9 +327,8 @@ public class ImagenDa {
 		Connection dbConnection = null;
 		CallableStatement callableStatement = null;
 		ResultSet rs = null;
-
-		List<HomeViewModel> lsthome = new ArrayList<HomeViewModel>();
-
+		HomeViewModel home = new HomeViewModel();
+		List<HomeViewModel> lsthome = new ArrayList<HomeViewModel>(); 
 		HomeViewModelResponse lsthomeres = new HomeViewModelResponse();
 		String getDBUSERCursorSql = "{CALL sp_ListImagenByIdProduct(?)}";
 		try {
@@ -346,24 +345,22 @@ public class ImagenDa {
 			while (resultSet.next()) {
 				Imagen Imagen = new Imagen();
 				Product Producto = new Product();
-				Price Price = new Price();
-				HomeViewModel home = new HomeViewModel();
-				Producto.setName(resultSet.getString("name"));
+				Producto.setName(resultSet.getString("ProductName"));
 				Producto.setIdProduct(resultSet.getInt("idProduct"));
-				Price.setHigherPrice(resultSet.getBigDecimal("HigherPrice"));
-				Price.setSmallerPrice(resultSet.getBigDecimal("SmallerPrice"));
-				Imagen.setDescription(resultSet.getString("Description"));
-				Imagen.setCountViews(resultSet.getInt("CountViews"));
+				Producto.setIdPrice(resultSet.getInt("IdPrice"));
+//				Price.setHigherPrice(resultSet.getBigDecimal("HigherPrice"));
+//				Price.setSmallerPrice(resultSet.getBigDecimal("SmallerPrice"));
+				Imagen.setImagenCode(resultSet.getString("ImagenCode"));
 				Imagen.setIdImagen(resultSet.getInt("idImagen"));
 				home.setImagen(Imagen);
-				home.setPrice(Price);
 				home.setProduct(Producto);
 				lsthome.add(home);
 			}
 			lsthomeres.setCode(200);
 			lsthomeres.setDescription("Response OK");
 			lsthomeres.setMessage("OK");
-			lsthomeres.setListHomeViewModel(lsthome);
+			lsthomeres.setHomeViewModel(home);
+			//lsthomeres.setListHomeViewModel(lsthome);
 			resultSet.close();
 
 		} catch (SQLException e) {

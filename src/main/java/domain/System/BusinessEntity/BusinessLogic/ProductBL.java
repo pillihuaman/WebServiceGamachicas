@@ -12,7 +12,7 @@ import repository.System.DataAccess.MySql.ProductDA;
 import repository.System.DataAccess.MySql.WebServiceDA;
 
 public class ProductBL {
-	public static List<Product> ListProduct() {
+	public static ProductoResponse ListProduct() {
 		return ProductDA.ListProduct();
 	}
 

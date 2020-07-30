@@ -40,8 +40,6 @@ public class WebServiceBL {
 		return WebServiceDA.Parametersel(Parameter);
 	}
 
-
-
 	public static DetailImagenResponse DetailImagenIns(Detailimagen detailImagen) {
 		return WebServiceDA.DetailImagenIns(detailImagen);
 		// WebServiceDA.ImagenIns(Imagen);

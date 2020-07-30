@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
@@ -29,15 +35,17 @@ public class WebServiceProductController {
 	}
 
 	@PostMapping("/ListProduct")
-	public List<Product> ListProduct(@RequestBody String keySearch) {
+	public ProductoResponse ListProduct(@RequestBody String keySearch) {
 		ProductRepository WebService = new ProductRepository();
 		return WebService.ListProduct();
 	}
 
 	@PostMapping(path = "/HomeProductIns", consumes = "application/json", produces = "application/json")
-	public HomeViewModelResponse HomeProductIns(@RequestBody HomeViewModel homeViewModel) {
+	public HomeViewModelResponse HomeProductIns( @RequestParam("data") String data , @RequestParam(required=false, value="file") MultipartFile file) {
 		ProductRepository WebService = new ProductRepository();
-		return WebService.HomeProductIns(homeViewModel);
+		JsonObject convertedObject = new Gson().fromJson(data, JsonObject.class);
+		  // HomeViewModel homeViewModel = fromJsonString(companyJsonStr, HomeViewModel.class);
+		return WebService.HomeProductIns(null);
 	}
 
 	@PostMapping(path = "/ListDetImagenByIdProduct", consumes = "application/json", produces = "application/json")
@@ -69,4 +77,5 @@ public class WebServiceProductController {
 		ProductRepository WebService = new ProductRepository();
 		return WebService.ListDetailProductByIdProduct(pro);
 	}
+
 }

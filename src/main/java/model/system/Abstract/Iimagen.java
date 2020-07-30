@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
+import common.system.model.response.DetailImagenResponse;
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ImagenResponse;
 import domain.System.BusinessEntity.CrudImagenBE;
@@ -30,4 +31,6 @@ public interface Iimagen {
 	ImagenResponse ImagenIns( Imagen  Imagen);
 	ImagenResponse ImagenInss( Imagen  Imagen);
 	ImagenResponse ImagenSel(Imagen img);
+	DetailImagenResponse DetailImagenIns(Detailimagen detimg);
+
 }

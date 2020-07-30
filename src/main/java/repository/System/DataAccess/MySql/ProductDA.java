@@ -194,8 +194,8 @@ public class ProductDA {
 		}
 		return lsthome;
 	}
-	public static List<Product> ListProduct() {
-		List<Product> result = null;
+	public static ProductoResponse ListProduct() {
+		ProductoResponse pro= new ProductoResponse();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -209,17 +209,17 @@ public class ProductDA {
 					+ "product.ExpirationDate,\r\n" + "product.Status,\r\n" + "product.Description,\r\n"
 					+ "product.createDate,\r\n" + "product.updatedate\r\n" + "FROM gamachicas.product;";
 			try (org.sql2o.Connection con = sql2o.open()) {
-				result = con.createQuery(sql)
+				pro.setListProduct( con.createQuery(sql)
 						// .addParameter("idimagen", 1)
-						.executeAndFetch(Product.class);
+						.executeAndFetch(Product.class));
 			}
 
-			return result;
+			return pro;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result;
+		return  pro;
 	}
 	public static ProductoResponse ProductoSel(Product pro) {
 		ProductoResponse result = new ProductoResponse();

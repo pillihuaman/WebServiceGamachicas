@@ -13,7 +13,7 @@ import domain.System.BusinessEntity.Base.Product;
 public interface IProduct {
 	HomeViewModel HomeViewModelSelByIdDroducto(Product pro);
 	List<HomeViewModel> ListDetImagenByIdProduct(Product pro);
-	List<Product> ListProduct();
+	ProductoResponse ListProduct();
 	ProductoResponse ProductoSel(Product pro);
 	boolean DetailProductIns(@RequestBody Detailproduct pro);
 	List<Detailproduct> ListDetailProductByIdProduct(Detailproduct pro);
