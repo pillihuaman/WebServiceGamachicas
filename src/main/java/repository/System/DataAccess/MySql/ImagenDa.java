@@ -353,7 +353,7 @@ public class ImagenDa {
 				Imagen.setImagenCode(resultSet.getString("ImagenCode"));
 				Imagen.setIdImagen(resultSet.getInt("idImagen"));
 				home.setImagen(Imagen);
-				home.setProduct(Producto);
+				home.setProducto(Producto);
 				lsthome.add(home);
 			}
 			lsthomeres.setCode(200);
@@ -436,7 +436,7 @@ public class ImagenDa {
 				Imagen.setIdImagen(resultSet.getInt("idImagen"));
 				home.setImagen(Imagen);
 				home.setPrice(Price);
-				home.setProduct(Producto);
+				home.setProducto(Producto);
 				lsthome.add(home);
 			}
 			lsthomeres.setCode(200);

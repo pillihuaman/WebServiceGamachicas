@@ -6,41 +6,37 @@ public class HomeViewModel extends Response {
 	*/
 	private static final long serialVersionUID = 1L;
 
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	public Imagen getImagen() {
-		return Imagen;
+		return imagen;
 	}
-
-	public Product getProduct() {
-		return Product;
+	public Product getProducto() {
+		return product;
 	}
-
 	public Price getPrice() {
-		return Price;
+		return price;
 	}
-
-	public Detailimagen getDetailimagen() {
-		return Detailimagen;
+	public Detailimagen getDetailImagen() {
+		return detailImagen;
 	}
-
 	public void setImagen(Imagen imagen) {
-		Imagen = imagen;
+		this.imagen = imagen;
 	}
-
-	public void setProduct(Product producto) {
-		Product = producto;
+	public void setProducto(Product producto) {
+		this.product = producto;
 	}
-
 	public void setPrice(Price price) {
-		Price = price;
+		this.price = price;
 	}
-
-	public void setDetailimagen(Detailimagen detailimagen) {
-		Detailimagen = detailimagen;
+	public void setDetailImagen(Detailimagen detailImagen) {
+		this.detailImagen = detailImagen;
 	}
-
-	private Imagen Imagen;
-	private Product Product;
-	private Price Price;
-	private Detailimagen Detailimagen;
+	private Imagen imagen;
+	private Product product;
+	private Price price;
+	private Detailimagen detailImagen;
 
 }

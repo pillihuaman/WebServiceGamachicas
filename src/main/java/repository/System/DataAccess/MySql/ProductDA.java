@@ -60,10 +60,10 @@ public class ProductDA {
 				Imagen.setCountViews(resultSet.getInt("countViews"));
 				Imagen.setIdImagen(resultSet.getInt("idimagen"));
 				Detailimagen.setIdDetailImagen(resultSet.getInt("IdDetailImagen"));
-				home.setDetailimagen(Detailimagen);
+				home.setDetailImagen(Detailimagen);
 				home.setImagen(Imagen);
 				home.setPrice(Price);
-				home.setProduct(Producto);
+				home.setProducto(Producto);
 
 				lsthome.add(home);
 			}
@@ -138,10 +138,10 @@ public class ProductDA {
 				Imagen.setCountViews(resultSet.getInt("PositionWeb"));
 				Imagen.setIdImagen(resultSet.getInt("idimagen"));
 				Detailimagen.setIdDetailImagen(resultSet.getInt("IdDetailImagen"));
-				home.setDetailimagen(Detailimagen);
+				home.setDetailImagen(Detailimagen);
 				home.setImagen(Imagen);
 				home.setPrice(Price);
-				home.setProduct(Producto);
+				home.setProducto(Producto);
 				home.setCode(200);
 				home.setDescription("Response OK");
 				home.setMessage("OK");
@@ -292,7 +292,7 @@ public class ProductDA {
 				Imgen.setIdImagen(resultSet.getInt("idimagen"));
 				Imgen.setUrl(resultSet.getString("url"));
 				home.setPrice(Price);
-				home.setProduct(Producto);
+				home.setProducto(Producto);
 
 			}
 			resultSet.close();
@@ -470,10 +470,10 @@ public class ProductDA {
 			home.setFullpath("/WebServiceDA/HomeProductIns");
 			try (org.sql2o.Connection con = sql2o.beginTransaction()) {
 				con.commit(false);
-				Pro = SaveProduct(homeViewModel.getProduct());
+				Pro = SaveProduct(homeViewModel.getProducto());
 				if (Pro.getCode() == 200) {
 					IdProduct = Pro.getProduct().getIdProduct();
-					homeViewModel.getProduct().setIdProduct(IdProduct);
+					homeViewModel.getProducto().setIdProduct(IdProduct);
 					Pri = homeViewModel.getPrice();
 					Pri.setIdProduct(IdProduct);
 					img = homeViewModel.getImagen();
@@ -486,12 +486,12 @@ public class ProductDA {
 						home.setDescription(ImagenBL.ImagenIns(img).getDescription());
 						home.setMessage("Error Inesperado");
 						home.setHomeViewModel(homeViewModel);
-						ProductDel(homeViewModel.getProduct());
+						ProductDel(homeViewModel.getProducto());
 						con.rollback();
 						return home;
 					} else {
 						prire = PriceDA.PriceIns(Pri);
-						producto = ProductoSel(homeViewModel.getProduct()).getProduct();
+						producto = ProductoSel(homeViewModel.getProducto()).getProduct();
 						producto.setIdImagen(imgr.getImagen().getIdImagen());
 						producto.setIdPrice(prire.getPrice().getIdPrice());
 						ProductUpd(producto);

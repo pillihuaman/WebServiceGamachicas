@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,31 +64,25 @@ public class WebServiceImagenController {
 		return WebService.DetailImagenIns(img);
 	}
 
-	  
-
-	   @PostMapping("/savefile")
-	   public ResponseEntity<String> handleFileUpload(
-			   @RequestParam(required=false, value="file") MultipartFile file,
-			   @RequestParam("idImagen") String idImagen) {
+	   @RequestMapping(path ="/savefile", method = RequestMethod.POST, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE})
+	   public ResponseEntity handleFileUpload(@RequestPart("id") String id,  @RequestPart("file") MultipartFile file)
+	   {
 		   List<String> files = new ArrayList<String>();
 		   //private final Path rootLocation = Paths.get("_Path_To_Save_The_File");
 		   String message;
 	      try {
-	         try {
-	            //Files.copy(file.getInputStream(), this.rootLocation.resolve("file_name.pdf"));
-	         } catch (Exception e) {
-	            throw new RuntimeException("FAIL!");
-	         }
+	      
 	         files.add(file.getOriginalFilename());
 
 	         message = "Successfully uploaded!";
 	         return ResponseEntity.status(HttpStatus.OK).body(message);
-	      } catch (Exception e) {
+	      }
+	      catch (Exception e) {
 	         message = "Failed to upload!";
 	         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
 	      }
 	   }
-	
+	  
 	@RequestMapping(value = "/GetPicture", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	public ResponseEntity<byte[]> GetImagen(@RequestParam("id") int idimagen) throws IOException {
 		Imagen img = new Imagen();

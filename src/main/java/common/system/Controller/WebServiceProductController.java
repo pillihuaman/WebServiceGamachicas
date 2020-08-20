@@ -1,13 +1,19 @@
 package common.system.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,10 +21,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import common.system.Help.ConvertClass;
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
 import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
+import domain.System.BusinessEntity.Base.Imagen;
 import domain.System.BusinessEntity.Base.Product;
 import model.system.repository.ProductRepository;
 import model.system.repository.WebService;
@@ -40,12 +48,37 @@ public class WebServiceProductController {
 		return WebService.ListProduct();
 	}
 
-	@PostMapping(path = "/HomeProductIns", consumes = "application/json", produces = "application/json")
-	public HomeViewModelResponse HomeProductIns( @RequestParam("data") String data , @RequestParam(required=false, value="file") MultipartFile file) {
+	@RequestMapping(path = "/savefile", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
+			MediaType.APPLICATION_OCTET_STREAM_VALUE })
+	public ResponseEntity handleFileUpload(@RequestPart("id") String id, @RequestPart("file") MultipartFile file) {
+		List<String> files = new ArrayList<String>();
+		// private final Path rootLocation = Paths.get("_Path_To_Save_The_File");
+		String message;
+		try {
+
+			files.add(file.getOriginalFilename());
+
+			message = "Successfully uploaded!";
+			return ResponseEntity.status(HttpStatus.OK).body(message);
+		} catch (Exception e) {
+			message = "Failed to upload!";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(message);
+		} 
+	}
+	@RequestMapping(path = "/HomeProductIns", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
+			MediaType.APPLICATION_OCTET_STREAM_VALUE })
+	//@PostMapping(path = "/HomeProductIns", consumes = "application/json", produces = "application/json")
+	public HomeViewModelResponse HomeProductIns(@RequestPart("id") String id, @RequestPart("file") MultipartFile file) {
 		ProductRepository WebService = new ProductRepository();
-		JsonObject convertedObject = new Gson().fromJson(data, JsonObject.class);
-		  // HomeViewModel homeViewModel = fromJsonString(companyJsonStr, HomeViewModel.class);
-		return WebService.HomeProductIns(null);
+		HomeViewModel homeview= new  HomeViewModel();
+		Imagen img= new Imagen();
+		HomeViewModel convertedObject = new Gson().fromJson(id, HomeViewModel.class);
+		img=convertedObject.getImagen();
+		img.setImagendata(ConvertClass.ConverMultipartFileToByteArray(file));
+		convertedObject.setImagen(img);
+		// HomeViewModel homeViewModel = fromJsonString(companyJsonStr,
+		// HomeViewModel.class);
+		return WebService.HomeProductIns(convertedObject);
 	}
 
 	@PostMapping(path = "/ListDetImagenByIdProduct", consumes = "application/json", produces = "application/json")
