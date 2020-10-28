@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Product;
@@ -19,4 +20,5 @@ public interface IProduct {
 	List<Detailproduct> ListDetailProductByIdProduct(Detailproduct pro);
 	ProductoResponse SaveProduct(@RequestBody Product pro);
 	HomeViewModelResponse HomeProductIns(HomeViewModel homeViewModel);
+	boolean RegisterDetailImagen(Detailimagen pro);
 }

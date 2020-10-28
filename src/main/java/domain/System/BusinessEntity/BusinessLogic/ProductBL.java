@@ -4,6 +4,7 @@ import java.util.List;
 
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
@@ -46,6 +47,10 @@ public class ProductBL {
 	public static HomeViewModelResponse HomeProductIns(HomeViewModel homeViewModel) {
 		return ProductDA.HomeProductIns(homeViewModel);
 		// WebServiceDA.ImagenIns(Imagen);
+	}
+	public static boolean RegisterDetailImagen(Detailimagen pro) {
+		return ProductDA.RegisterDetailImagen(pro);
+		
 	}
 
 }

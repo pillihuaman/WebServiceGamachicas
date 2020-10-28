@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.sql2o.converters.Convert;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import com.google.gson.JsonObject;
 import common.system.Help.ConvertClass;
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Imagen;
@@ -79,6 +81,35 @@ public class WebServiceProductController {
 		// HomeViewModel homeViewModel = fromJsonString(companyJsonStr,
 		// HomeViewModel.class);
 		return WebService.HomeProductIns(convertedObject);
+	}
+	@RequestMapping(path = "/RegisterDetailImagen", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE,
+			MediaType.APPLICATION_OCTET_STREAM_VALUE })
+	//@PostMapping(path = "/HomeProductIns", consumes = "application/json", produces = "application/json")
+	public HomeViewModelResponse RegisterDetailImagen(@RequestPart("id") String id,
+			@RequestPart("filep") MultipartFile filep,@RequestPart("fileE") MultipartFile fileE,
+			@RequestPart("fileD") MultipartFile fileD) {
+		ProductRepository WebService = new ProductRepository();
+		Detailimagen detailImagen= new  Detailimagen();
+		 if (id != null &&  ! id.isEmpty())
+		 {
+			detailImagen.setIdImagen(Integer.parseInt(id));
+			 if(filep!= null)
+			 {
+				 detailImagen.setImagendata( ConvertClass.ConverMultipartFileToByteArray(filep));
+				 WebService.RegisterDetailImagen(detailImagen);
+			 }
+			 if(fileE!= null)
+			 {
+				 detailImagen.setImagendata( ConvertClass.ConverMultipartFileToByteArray(fileE));
+				 WebService.RegisterDetailImagen(detailImagen);
+			 }
+			 if(fileD!= null)
+			 {
+				 detailImagen.setImagendata( ConvertClass.ConverMultipartFileToByteArray(fileD));
+				 WebService.RegisterDetailImagen(detailImagen);
+			 } 
+		 }
+		return WebService.HomeProductIns(null);
 	}
 
 	@PostMapping(path = "/ListDetImagenByIdProduct", consumes = "application/json", produces = "application/json")

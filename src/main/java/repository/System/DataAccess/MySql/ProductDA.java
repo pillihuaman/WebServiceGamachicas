@@ -27,7 +27,7 @@ import infrastructure.System.Adapters.EntityDBConnection;
 import infrastructure.System.Adapters.MySqlAdapter;
 
 public class ProductDA {
-
+//RegisterDetailImagen
 	public static List<HomeViewModel> ListDetImagenByIdProduct(Product pro) {
 		Connection dbConnection = null;
 		CallableStatement callableStatement = null;
@@ -592,4 +592,47 @@ public class ProductDA {
 		return prores;
 	}
 
+	public static boolean RegisterDetailImagen(Detailimagen pro) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			EntityDBConnection conne = MySqlAdapter.getConnectionString();
+			Sql2o sql2o = new Sql2o(conne.getUrl(), conne.getUser(), conne.getPassword());
+			String sql = "INSERT INTO gamachicas.detailimagen\r\n" + 
+					"(\r\n" + 
+					"idImagen,\r\n" + 
+					"imagendata,\r\n" + 
+					"Vista,\r\n" + 
+					"url,\r\n" + 
+					"Status,\r\n" + 
+					"CreateDate,\r\n" + 
+					"UpdateDate)\r\n" + 
+					"VALUES\r\n" + 
+					"(:idImagen ,\r\n" + 
+					":imagendata ,\r\n" + 
+					":Vista ,\r\n" + 
+					":url ,\r\n" + 
+					":Status ,\r\n" + 
+					":CreateDate ,\r\n" + 
+					":UpdateDate);";
+			try (org.sql2o.Connection con = sql2o.open()) {
+				con.createQuery(sql, true).addParameter("idImagen", pro.getIdImagen())
+						.addParameter("imagendata", pro.getImagendata())
+						.addParameter("Vista", pro.getVista())
+						.addParameter("url", pro.getUrl())
+						.addParameter("Status", pro.getStatus())
+						.addParameter("CreateDate", LocalDateTime.now())
+						.addParameter("UpdateDate", LocalDateTime.now())
+						.executeUpdate().getKey();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 }

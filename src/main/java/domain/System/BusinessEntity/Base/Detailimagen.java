@@ -20,7 +20,8 @@ public class Detailimagen implements Serializable {
 	private Timestamp createDate;
 
 	private int idImagen;
-
+	@Lob
+	private byte[] imagendata;
 	private byte status;
 
 	private Timestamp updateDate;
@@ -34,6 +35,14 @@ public class Detailimagen implements Serializable {
 
 	public int getIdDetailImagen() {
 		return this.idDetailImagen;
+	}
+
+	public byte[] getImagendata() {
+		return imagendata;
+	}
+
+	public void setImagendata(byte[] imagendata) {
+		this.imagendata = imagendata;
 	}
 
 	public void setIdDetailImagen(int idDetailImagen) {

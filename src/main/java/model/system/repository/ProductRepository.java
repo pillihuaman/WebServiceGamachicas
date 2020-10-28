@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import common.system.model.response.HomeViewModelResponse;
 import common.system.model.response.ProductoResponse;
+import domain.System.BusinessEntity.Base.Detailimagen;
 import domain.System.BusinessEntity.Base.Detailproduct;
 import domain.System.BusinessEntity.Base.HomeViewModel;
 import domain.System.BusinessEntity.Base.Product;
@@ -55,6 +56,12 @@ public class ProductRepository implements IProduct {
 	public HomeViewModelResponse HomeProductIns(HomeViewModel homeViewModel) {
 		// TODO Auto-generated method stub
 		return ProductBL.HomeProductIns(homeViewModel);
+	}
+
+	@Override
+	public boolean RegisterDetailImagen(Detailimagen pro) {
+		// TODO Auto-generated method stub
+		return ProductBL.RegisterDetailImagen(pro);
 	}
 
 }
