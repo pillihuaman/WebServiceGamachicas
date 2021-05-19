@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: WSGamachicas.com
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: zarmirph
+Built-By: ADMIN
 Implementation-Vendor-Id: id.WSGamachicas.com
-Build-Jdk: 1.8.0_261
+Build-Jdk: 1.8.0_291
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/api.com
 Created-By: Maven Integration for Eclipse
